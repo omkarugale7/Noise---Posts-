@@ -26,7 +26,7 @@ jobs:
       - name: Build and tag Docker image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY}}
+          ECR_REPOSITORY: noiseposts
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA Dockerfile
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA $ECR_REGISTRY/$ECR_REPOSITORY:latest
@@ -34,6 +34,6 @@ jobs:
       - name: Push Docker image to ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY}}
+          ECR_REPOSITORY: noiseposts
         run: |
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
